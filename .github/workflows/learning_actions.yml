@@ -2,6 +2,7 @@ name: Github Action TEST
 on: [push]
 jobs:
   preparing:
+    runs-on: ubuntu-latest
     name: discovering environment
     steps:
       - run: pwd
