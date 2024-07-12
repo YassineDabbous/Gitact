@@ -5,6 +5,8 @@ jobs:
     runs-on: ubuntu-latest
     name: discovering environment
     steps:
+      - name: clone this repo
+        uses: actions/checkout@v4
       - run: pwd
       - name: make a file
         run: echo > f1l3.txt
@@ -12,3 +14,4 @@ jobs:
         run: ls -la
       - run: rm f1l3.txt
       - run: ls -la
+      - run: ls -la ./.github/workflows
