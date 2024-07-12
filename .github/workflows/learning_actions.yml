@@ -1,0 +1,13 @@
+name: Github Action TEST
+on: [push]
+jobs:
+  preparing:
+    name: discovering environment
+    steps:
+      - run: pwd
+      - name: make a file
+        run: echo > f1l3.txt
+      - name: show files
+        run: ls -la
+      - run: rm f1l3.txt
+      - run: ls -la
