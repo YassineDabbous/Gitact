@@ -30,15 +30,20 @@ jobs:
           tools: phpunit
           coverage: none
 
+      - name: Require laravel ${{ matrix.laravel }}
+        run: |
+          composer require "laravel/framework:${{ matrix.laravel }}" "orchestra/testbench:${{ matrix.testbench }}" --no-interaction --no-update
+      
+      - name: show composer schema
+        run: cat composer.json
+
       - name: Install dependencies
         run: |
           composer require "laravel/framework:${{ matrix.laravel }}" "orchestra/testbench:${{ matrix.testbench }}" --no-interaction --no-update
       
+
       - name: show files
         run: ls -la
-
-      - name: Print PHP version
-        run: echo ${{ steps.setup-php.outputs}}
 
       - name: show composer packages
         run: cat composer.lock
