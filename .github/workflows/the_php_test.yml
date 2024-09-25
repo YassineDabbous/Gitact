@@ -5,11 +5,11 @@ jobs:
     runs-on: ${{ matrix.os }}
     name: "PHP${{matrix.php}} - Laravel${{matrix.laravel}}"
     strategy:
-      fail-fast: false
+      fail-fast: true
       matrix:
           os: ['ubuntu-latest']
           php: [8.3]
-          laravel: [10.*, 11.*]
+          laravel: [11.*, 10.*]
           include:
               - laravel: 11.*
                 testbench: 9.*
@@ -30,6 +30,12 @@ jobs:
       - name: Install dependencies
         run: |
           composer require "laravel/framework:${{ matrix.laravel }}" "orchestra/testbench:${{ matrix.testbench }}" --no-interaction --no-update
+
+      - name: Print PHP version
+        run: echo ${{ steps.setup-php.outputs.php-version }}
+
+      - name: cat composer.lock
+        run: cat ./composer.lock
 
       - name: run tests
         run: composer test
