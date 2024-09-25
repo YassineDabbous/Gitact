@@ -1,0 +1,46 @@
+{
+    "name": "yassinedabbous/laravel-file-cast",
+    "description": "Easily link your uploads with their db columns",
+    "type": "library",
+    "license": "MIT",
+    "homepage": "https://github.com/YassineDabbous/laravel-file-cast",
+    "authors": [
+        {
+            "name": "Yassine Dabbous",
+            "email": "yassine.dabbous@gmail.com"
+        }
+    ],
+    "minimum-stability": "stable",
+    "prefer-stable": true,
+    "keywords": ["laravel", "file cast", "file field", "file column", "image column"],
+    "require": {
+        "php": ">=7.4"
+    },
+    "require-dev": {
+        "orchestra/testbench": "^9.0",
+        "phpunit/phpunit": "^10"
+    },
+    "autoload": {
+        "psr-4": {
+            "YassineDabbous\\FileCast\\": "src/"
+        }
+    },
+    "autoload-dev": {
+      "psr-4": {
+        "YassineDabbous\\FileCast\\Tests\\": "tests/"
+      }
+    },
+    "extra": {
+        "laravel": {
+            "providers": [
+                "YassineDabbous\\FileCast\\FileCastServiceProvider"
+            ]
+        }
+    },
+    "scripts": {
+      "test": "vendor/bin/phpunit",
+      "test-f": "vendor/bin/phpunit --filter",
+      "test-s": "vendor/bin/phpunit --testsuite",
+      "test-c": "vendor/bin/phpunit --coverage-html ./coverage"
+    }
+}
