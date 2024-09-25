@@ -5,7 +5,7 @@ jobs:
     runs-on: ${{ matrix.os }}
     name: "PHP${{matrix.php}} - Laravel${{matrix.laravel}}"
     strategy:
-      fail-fast: true
+      fail-fast: false
       matrix:
           os: ['ubuntu-latest']
           php: [8.3]
@@ -19,6 +19,9 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v4
       
+      - name: show files
+        run: ls -la
+
       - name: Setup PHP
         uses: shivammathur/setup-php@v2
         with:
@@ -30,12 +33,15 @@ jobs:
       - name: Install dependencies
         run: |
           composer require "laravel/framework:${{ matrix.laravel }}" "orchestra/testbench:${{ matrix.testbench }}" --no-interaction --no-update
+      
+      - name: show files
+        run: ls -la
 
       - name: Print PHP version
-        run: echo ${{ steps.setup-php.outputs.php-version }}
+        run: echo ${{ steps.setup-php.outputs}}
 
-      - name: cat composer.lock
-        run: cat ./composer.lock
+      - name: show composer packages
+        run: cat composer.lock
 
       - name: run tests
         run: composer test
