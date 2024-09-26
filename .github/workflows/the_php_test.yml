@@ -40,13 +40,13 @@ jobs:
       - name: Require laravel ${{ matrix.laravel }}
         run: |
           composer require "laravel/framework:${{ matrix.laravel }}" "orchestra/testbench:${{ matrix.testbench }}" --no-interaction --no-update
+          composer update --prefer-stable --prefer-dist --no-interaction
       
       - name: show composer schema
         run: cat composer.json
 
       - name: Install dependencies
-        run: |
-          composer install
+        run: composer install
       
 
       - name: show files
