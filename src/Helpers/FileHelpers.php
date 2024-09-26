@@ -62,6 +62,7 @@ trait FileHelpers{
 
 
     
+    // Str::isUrl() For Laravel <= 10
     public static function isUrl($value, array $protocols = [])
     {
         if (! is_string($value)) {

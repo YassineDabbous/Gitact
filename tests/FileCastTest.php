@@ -12,6 +12,8 @@ class FileCastTest extends BaseTestCase
         Storage::fake('fake_disk');
         $model = new TestModel();
         $model->avatar = UploadedFile::fake()->image('photo1.jpg');
+        $model->save();
+        $model->refresh();
 
         Storage::disk('fake_disk')->assertExists($model->avatar);
     }
@@ -63,6 +65,8 @@ class FileCastTest extends BaseTestCase
         
         $this->assertStringEndsWith('.json', $model->avatar);
 
+        dump($model->avatar->toArray());
+
         $this->assertEquals($model->avatar->toArray(), $array);
     }
 
@@ -95,13 +99,15 @@ class FileCastTest extends BaseTestCase
         $model = new TestModel();
         $model->avatar = UploadedFile::fake()->image('photo1.jpg');
         $model->save();
-        $model->fresh();
+        $model->refresh();
 
         $path = $model->avatar;
 
         Storage::disk('fake_disk')->assertExists($path);
 
         $model->avatar = null;
+        $model->save();
+        $model->refresh();
         
         Storage::disk('fake_disk')->assertMissing($path);
     }
@@ -115,7 +121,7 @@ class FileCastTest extends BaseTestCase
         $model = new TestModel();
         $model->avatar = UploadedFile::fake()->image('photo1.jpg');
         $model->save();
-        $model->fresh();
+        $model->refresh();
 
         $path = $model->avatar;
 
@@ -139,7 +145,7 @@ class FileCastTest extends BaseTestCase
         $model = new TestModel();
         $model->avatar = UploadedFile::fake()->image('photo1.jpg');
         $model->save();
-        $model->fresh();
+        $model->refresh();
 
         $path = $model->avatar;
 
